@@ -110,7 +110,7 @@ class MelDataset(torch.utils.data.Dataset):
 
     def __getitem__(self, index):
         filename = self.audio_files[index]
-        print(f"File: {filename}")
+        #print(f"File: {filename}")
         if self._cache_ref_count == 0:
             audio, sampling_rate = load_wav(filename)
             audio = audio / MAX_WAV_VALUE
@@ -128,7 +128,7 @@ class MelDataset(torch.utils.data.Dataset):
         audio = torch.FloatTensor(audio)
         audio = audio.unsqueeze(0)
 
-        print(f"Audio 1: {audio.shape}")
+        #print(f"Audio 1: {audio.shape}")
 
         if not self.fine_tuning:
             if self.split:
@@ -165,8 +165,8 @@ class MelDataset(torch.utils.data.Dataset):
                                    self.sampling_rate, self.hop_size, self.win_size, self.fmin, self.fmax_loss,
                                    center=False)
 
-        print(f"Audio 2: {audio.shape}")
-        print(f"Mel: {mel.shape}")
+        #print(f"Audio 2: {audio.shape}")
+        #print(f"Mel: {mel.shape}")
 
         return (mel.squeeze(), audio.squeeze(0), filename, mel_loss.squeeze())
 
